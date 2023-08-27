@@ -10,6 +10,7 @@ from torch_geometric.utils.num_nodes import maybe_num_nodes
 from torch_scatter import scatter_add
 from functools import partial
 from .rrwp import add_full_rrwp
+from .n2v import add_full_n2v
 
 
 def compute_posenc_stats(data, pe_types, is_undirected, cfg):
@@ -34,7 +35,7 @@ def compute_posenc_stats(data, pe_types, is_undirected, cfg):
     # Verify PE types.
     for t in pe_types:
         if t not in ['LapPE', 'EquivStableLapPE', 'SignNet',
-                     'RWSE', 'HKdiagSE', 'HKfullPE', 'ElstaticSE','RRWP']:
+                     'RWSE', 'HKdiagSE', 'HKfullPE', 'ElstaticSE','RRWP', 'N2V']:
             raise ValueError(f"Unexpected PE stats selection {t} in {pe_types}")
 
     # Basic preprocessing of the input graph.
@@ -146,6 +147,13 @@ def compute_posenc_stats(data, pe_types, is_undirected, cfg):
                             spd=param.spd, # by default False
                             )
         data = transform(data)
+    
+    if 'N2V' in pe_types:
+        param = cfg.posenc_N2V
+        transform = partial(add_full_n2v,
+                            walk_length=param.ksteps)
+        data = transform(data)
+        # use node2vec to generate e
 
     return data
 

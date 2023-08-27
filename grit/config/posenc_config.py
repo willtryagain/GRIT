@@ -1,12 +1,10 @@
 from torch_geometric.graphgym.register import register_config
 from yacs.config import CfgNode as CN
 
-
 @register_config('posenc')
 def set_cfg_posenc(cfg):
     """Extend configuration with positional encoding options.
     """
-
     # Argument group for each Positional Encoding class.
     cfg.posenc_LapPE = CN()
     cfg.posenc_SignNet = CN()

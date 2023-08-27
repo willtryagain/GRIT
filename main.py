@@ -114,13 +114,14 @@ def run_loop_settings():
         run_ids = split_indices
     return run_ids, seeds, split_indices
 
-
+  
+ 
 if __name__ == '__main__':
     # Load cmd line args
     args = parse_args()
     # Load config file
     set_cfg(cfg)
-    # ----- note: allow to change config -----------
+    # ----- note: allow to change config ---------- -
     cfg.set_new_allowed(True)
     cfg.work_dir = os.getcwd()
     # -----------------------------

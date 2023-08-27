@@ -1,9 +1,11 @@
 # README
+
 This repo is the official implementation of [**_Graph Inductive Biases in Transformers without Message Passing_**](https://arxiv.org/abs/2305.17589) (Ma et al., ICML 2023)
 
 > The implementation is based on [GraphGPS (Rampasek et al., 2022)](https://github.com/rampasek/GraphGPS).
 
-### Python environment setup with Conda
+Python environment setup with Conda
+
 ```bash
 conda create -n grit python=3.9
 conda activate grit 
@@ -27,6 +29,9 @@ pip install pytorch-lightning # required by graphgym
 pip install setuptools==59.5.0
 # distuitls has conflicts with pytorch with latest version of setuptools
 
+pip install yacs opt_einsum graphgym pytorch-lightning setuptools==59.5.0
+
+
 # ---- experiment management tools --------
 # pip install wandb  # the wandb is used in GraphGPS but not used in GRIT (ours); please verify the usability before using.
 # pip install mlflow 
@@ -35,6 +40,7 @@ pip install setuptools==59.5.0
 ```
 
 ### Running GRIT
+
 ```bash
 # Run
 python main.py --cfg configs/GRIT/zinc-GRIT.yaml  wandb.use False accelerator "cuda:0" optim.max_epoch 2000 seed 41 dataset.dir 'xx/xx/data'
@@ -50,8 +56,8 @@ python main.py --cfg configs/GRIT/zinc-GRIT.yaml  wandb.use False accelerator "c
 - Scripts to execute are available under `./scripts/xxx.sh`
   - will run 4 trials of experiments parallelly on `GPU:0,1,2,3`.
 
-
 ## Citation
+
 If you find this work useful, please consider citing:
 
 ```

@@ -17,7 +17,7 @@ from torch_geometric.utils import (
 )
 import torch_sparse
 from torch_sparse import SparseTensor
-
+from icecream import ic
 
 def add_node_attr(data: Data, value: Any,
                   attr_name: Optional[str] = None) -> Data:
@@ -87,6 +87,7 @@ def add_full_rrwp(data,
         val = torch.argmax(val, dim=-1)
         rel_pe_val = F.one_hot(val, walk_length).type(torch.float)
         abs_pe = torch.zeros_like(abs_pe)
+
 
     data = add_node_attr(data, abs_pe, attr_name=attr_name_abs)
     data = add_node_attr(data, rel_pe_idx, attr_name=f"{attr_name_rel}_index")
